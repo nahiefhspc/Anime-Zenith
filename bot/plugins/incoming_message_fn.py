@@ -56,8 +56,7 @@ async def incoming_start_message_f(bot, update):
        reply_to_message_id=update.id,
    )
 
-async def incoming_compress_message_f(bot, update):
-    LOGGER.info("incoming_compress_message_f called with bot=%s, update=%s", bot, update)
+async def incoming_compress_message_f(update):
     isAuto = True
     d_start = time.time()
     c_start = time.time()
