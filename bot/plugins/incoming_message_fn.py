@@ -40,7 +40,7 @@ os.system("wget https://telegra.ph/file/059d8942b7c02750c01ab.jpg -O thumb.jpg")
 CURRENT_PROCESSES = {}
 CHAT_FLOOD = {}
 broadcast_ids = {}
-bot = app
+bot = app  # Local alias for app, the Pyrogram Client
 
 async def incoming_start_message_f(bot, update):
    await bot.send_message(
@@ -56,7 +56,8 @@ async def incoming_start_message_f(bot, update):
        reply_to_message_id=update.id,
    )
 
-async def incoming_compress_message_f(update):
+async def incoming_compress_message_f(bot, update):
+    LOGGER.info("incoming_compress_message_f called with bot=%s, update=%s", bot, update)
     isAuto = True
     d_start = time.time()
     c_start = time.time()
@@ -194,7 +195,7 @@ async def incoming_compress_message_f(update):
             )
             u_start = time.time()
 
-            anime_title_data = anitopy.parse(update.message.text)
+            anime_title_data = anitopy.parse(update.text)  # Using update.text as fixed previously
             anime_name = anime_title_data.get('anime_title')
             episode_number = anime_title_data.get('episode_number')
             season_number = anime_title_data.get('season_number')
@@ -245,7 +246,7 @@ async def incoming_compress_message_f(update):
             now = f"\n{ist} (GMT+05:30)`\n`{bst} (GMT+06:00)"
             await upload_start.delete()
             await bot.send_message(chat_id, f"**Upload Done, Bot is Free Now !!** \n\nProcess Done at `{now}`")
-            LOGGER.info(upload.caption);
+            LOGGER.info(upload.caption)
             try:
                 await upload.edit_caption(
                     caption=upload.caption.replace('{}', uploaded_time)
