@@ -36,20 +36,20 @@ from bot import (
 async def convert_video(video_file, output_directory, total_time, bot, message, chan_msg):
     kk = video_file.split("/")[-1]
     aa = kk.split(".")[-1]
-    out_put_file_name = kk.replace(f".{aa}", "[AnimeSpectrum].mkv")
+    out_put_file_name = kk.replace(f".{aa}", "[HACKHEIST].mkv")
     progress = os.path.join(output_directory, "progress.txt")
 
     # Reset global lists to avoid appending indefinitely
-    crf.clear(); crf.append("28")
+    crf.clear(); crf.append("24")
     codec.clear(); codec.append("libx264")
-    resolution.clear(); resolution.append("854x480")
+    resolution.clear(); resolution.append("1280x720")
     preset.clear(); preset.append("veryfast")
     audio_b.clear(); audio_b.append("40k")
     acodec.clear(); acodec.append("libopus")
-    name.clear(); name.append("Anime Zenith")
-    metadata.clear(); metadata.append("Anime Zenith")
-    metadata1.clear(); metadata1.append("Anime Zenith")
-    metadata2.clear(); metadata2.append("Anime Zenith")
+    name.clear(); name.append("HACKHEIST")
+    metadata.clear(); metadata.append("HACKHEIST")
+    metadata1.clear(); metadata1.append("HACKHEIST")
+    metadata2.clear(); metadata2.append("HACKHEIST")
     size.clear(); size.append("15")
 
     # Use a list for FFmpeg command to avoid shell escaping issues
