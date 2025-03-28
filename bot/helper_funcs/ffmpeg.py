@@ -44,7 +44,7 @@ async def convert_video(video_file, output_directory, total_time, bot, message, 
     codec.clear(); codec.append("libx264")
     resolution.clear(); resolution.append("1280x720")
     preset.clear(); preset.append("veryfast")
-    audio_b.clear(); audio_b.append("40k")
+    audio_b.clear(); audio_b.append("32k")
     acodec.clear(); acodec.append("libopus")
     name.clear(); name.append("HACKHEIST")
     metadata.clear(); metadata.append("HACKHEIST")
@@ -66,7 +66,7 @@ async def convert_video(video_file, output_directory, total_time, bot, message, 
         "-c:s", "copy",
         "-pix_fmt", "yuv420p",
         "-s", resolution[0],
-        "-b:v", "150k",
+        "-b:v", "32k",
         "-c:a", acodec[0],
         "-b:a", audio_b[0],
         "-preset", preset[0],
