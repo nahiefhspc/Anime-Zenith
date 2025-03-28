@@ -195,12 +195,16 @@ async def incoming_compress_message_f(bot, update):
             )
             u_start = time.time()
 
-            anime_title_data = anitopy.parse(update.text)  # Using update.text as fixed previously
-            anime_name = anime_title_data.get('anime_title')
-            episode_number = anime_title_data.get('episode_number')
-            season_number = anime_title_data.get('season_number')
+            # Handle case where update.text might be None
+            text_to_parse = update.text if update.text else os.path.basename(video)  # Fallback to filename
+            LOGGER.info(f"Parsing text: {text_to_parse}")
+            anime_title_data = anitopy.parse(text_to_parse)
+            anime_name = anime_title_data.get('anime_title', 'Unknown Anime')
+            episode_number = anime_title_data.get('episode_number', '??')
+            season_number = anime_title_data.get('season_number', '??')
 
             caption = f"{anime_name}, S{season_number}E{episode_number}, Anime Zenith"
+            LOGGER.info(f"Generated caption: {caption}")
 
             upload = await bot.send_document(
                 chat_id=update.chat.id,
@@ -303,4 +307,4 @@ async def incoming_cancel_message_f(bot, update):
             chat_id=update.chat.id,
             text="No active compression exists",
             reply_to_message_id=update.id
-)
+   )
